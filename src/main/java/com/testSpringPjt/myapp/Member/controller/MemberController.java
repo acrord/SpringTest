@@ -2,16 +2,24 @@ package com.testSpringPjt.myapp.Member.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.testSpringPjt.myapp.Member.Member;
+import com.testSpringPjt.myapp.Member.dao.MemberDao;
+import com.testSpringPjt.myapp.Member.service.MemberService;
 
 @Controller
 @RequestMapping(value="/member")
 public class MemberController {
+	
+	@Autowired
+	MemberService service;
 	
 	@ModelAttribute("cp")
 	public String getContextPath(HttpServletRequest request) {
@@ -24,16 +32,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/register", method = RequestMethod.POST)
-	public String memRegister(Member member) {
-		System.out.println(member.getUid());
-		System.out.println(member.getUpw());
-		System.out.println(member.getGender());
-		System.out.println(member.getUphone1());
-		System.out.println(member.getUphone2());
-		System.out.println(member.getUphone3());
-		 
-		
-		return "/login";
+	public ModelAndView memRegister(Member member) {
+		service.insertMember(member);
+		ModelAndView mav = new ModelAndView();
+		RedirectView redirectView = new RedirectView();
+		redirectView.setUrl("/myapp/member/login");
+		redirectView.setExposeModelAttributes(false);
+		mav.setView(redirectView);
+		return mav;
 	}
 	
 	@RequestMapping(value="/login")

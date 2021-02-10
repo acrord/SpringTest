@@ -2,7 +2,7 @@
 <%@ page session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
-	<link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet"/> 	
+	<link href="${cp}/resources/css/login.css" rel="stylesheet"/> 	
 	<title>Login</title>
 </head>
 <body>

@@ -3,7 +3,7 @@
 <html>
 <head>
 	
-	<title>Home</title>
+	<title>Register</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/part/navi.jsp"/>
@@ -15,8 +15,7 @@
 				<h2 class="card-title text-center" style="color: #113366;">회원가입</h2>
 			</div>
 			<div class="card-body">
-			<!-- onSubmit="registercall();return false" -->
-				<form class="form-signup" method="POST" action="${cp}/member/register">
+				<form name ="form" class="form-signup" onSubmit="registercall()" method="POST" action="${cp}/member/register">
 					<label for="uid" class="col-lg-2" style="margin-top:8px">아이디</label> 
 					<div class = "col-lg-10">
 						<input type="text" name="uid" class="form-control" placeholder="Your ID" required autofocus>
@@ -48,6 +47,7 @@
 						</div>
 					</div>
 					<br><BR><br>
+					<input type="hidden" name="contact">
 					<div style="padding-left: 5%; padding-right: 2%;"> 
 						<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">가입하기</button>
 					</div>
@@ -58,11 +58,13 @@
 </body>
 <script type= text/javascript>
 	function registercall(){
-		let uid = document.querySelector("#uid").value();
-		let upw = document.querySelector("#uid").value();
-		let uid = document.querySelector("#uid").value();
-		let uid = document.querySelector("#uid").value();
-		//location.href = '/myapp/member/login';
+		let uid = document.querySelector('input[name="uid"]').value;
+		let upw = document.querySelector('input[name="upw"]').value;
+		let uphone1 = document.querySelector('input[name="uphone1"]').value
+		let uphone2 = document.querySelector('input[name="uphone2"]').value
+		let uphone3 = document.querySelector('input[name="uphone3"]').value
+		let contact = uphone1 + "-" + uphone2 + "-" + uphone3; 
+		document.querySelector('input[name="contact"]').value = contact;
 	}
 </script>
 </html>
