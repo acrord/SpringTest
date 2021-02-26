@@ -15,8 +15,7 @@
 				<h2 class="card-title text-center" style="color: #113366;">로그인</h2>
 			</div>
 			<div class="card-body">
-			<!-- onSubmit="logincall();return false" -->
-				<form class="form-signin" method="POST" action="/member/login">
+				<form class="form-signin" method="POST" onSubmit="return logincall()" action="/myapp">
 					<h5 class="form-signin-heading">로그인 정보를 입력하세요</h5>
 					<label for="inputEmail" class="sr-only">Your ID</label> <input
 						type="text" id="uid" class="form-control" placeholder="Your ID"
@@ -35,6 +34,10 @@
 			</div>
 		</div>
 	</div>
+	<script
+	  src="https://code.jquery.com/jquery-3.5.1.min.js"
+	  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+	  crossorigin="anonymous"></script>
 	<script type= text/javascript>
 		function register(){
 			location.href='/myapp/member/register';
@@ -42,7 +45,21 @@
 		function logincall(){
 			let uid = document.querySelector('#uid').value();
 			let upw = document.querySelector('#upw').value();
-			console.log(uid + upw);
+			$.ajax({
+	            type:'post',
+	            url:'http://localhost:8090/myapp/member/loginCheck',
+	            dataType:'text',
+	            data:{uid:uid, upw:upw},
+	            success: function(data) {
+	                if(data === 'success') {
+	                    return true;
+	                } else {
+	                	alert("아이디나 비밀번호를 확인해주세요.")
+						return false;
+	                }
+	            }
+	        })
+			
 		}
 	</script>
 </body>

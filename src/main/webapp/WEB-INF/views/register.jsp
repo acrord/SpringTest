@@ -15,10 +15,13 @@
 				<h2 class="card-title text-center" style="color: #113366;">회원가입</h2>
 			</div>
 			<div class="card-body">
-				<form name ="form" class="form-signup" onSubmit="registercall()" method="POST" action="${cp}/member/register">
+				<form name ="form" class="form-signup" onSubmit="return registercall()" method="POST" action="${cp}/member/register">
 					<label for="uid" class="col-lg-2" style="margin-top:8px">아이디</label> 
-					<div class = "col-lg-10">
+					<div class = "col-lg-7">
 						<input type="text" name="uid" class="form-control" placeholder="Your ID" required autofocus>
+					</div>
+					<div class = "col-lg-3">
+						<button type="button" name="dupl" class="btn btn-primary btn-block" onclick="duplicationCheck()">중복확인</button>
 					</div>
 					<BR> <BR> <BR> 
 					<label for="upw" class="col-lg-2" style="margin-top:8px">비밀번호</label> 
@@ -56,7 +59,12 @@
 		</div>
 	</div>
 </body>
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
 <script type= text/javascript>
+	let checked = false;
 	function registercall(){
 		let uid = document.querySelector('input[name="uid"]').value;
 		let upw = document.querySelector('input[name="upw"]').value;
@@ -65,6 +73,29 @@
 		let uphone3 = document.querySelector('input[name="uphone3"]').value
 		let contact = uphone1 + "-" + uphone2 + "-" + uphone3; 
 		document.querySelector('input[name="contact"]').value = contact;
+		if(!checked) {
+			alert("아이디를 확인해주세요");
+			return false;
+		}
+	}
+	function duplicationCheck(){
+		let uid = document.querySelector('input[name="uid"]').value;
+		$.ajax({
+            type:'post',
+            url:'http://localhost:8090/myapp/member/userCheck',
+            dataType:'text',
+            data:{uid:uid},
+            async:false,
+            success: function(data) {
+                if(data === 'usable') {
+                    alert("사용 가능한 아이디 입니다.")
+                    checked = true;
+                } else {
+                	alert("사용 중인 아이디 입니다.")
+                	checked = false;
+                }
+            }
+        })
 	}
 </script>
 </html>

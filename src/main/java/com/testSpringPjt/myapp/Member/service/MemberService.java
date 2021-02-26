@@ -1,5 +1,6 @@
 package com.testSpringPjt.myapp.Member.service;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,18 @@ public class MemberService implements IMemberService{
 	public Member searchMember(Member member) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public String CheckId(String uid) {
+		Member result = dao.selectMember(uid);
+		if(result == null) return "usable";
+		else return "unable";
+	}
+	@Override
+	public Member loginCheck(String uid, String upw) {
+		Member result = dao.selectMember(uid);
+		return result;
 	}
 
 }

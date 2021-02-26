@@ -7,4 +7,6 @@ public interface IMemberService {
 	Member searchMember(Member member);
 //	Member memberModify(Member member);
 //	int memberRemove(Member member);
+	String CheckId(String uid);
+	Member loginCheck(String uid, String upw);
 }

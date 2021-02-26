@@ -21,6 +21,7 @@
 	      <ul class="nav navbar-nav">
 	        <li><a href="/myapp">Home</a></li>
 	      </ul>
+	      <!--<c:set var="name" value="${member.}" />-->
 	      <ul class="nav navbar-nav navbar-right">
 	        <li><a href="/myapp/member/login">Login</a></li>
 	      </ul>
