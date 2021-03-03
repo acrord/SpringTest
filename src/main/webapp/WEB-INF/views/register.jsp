@@ -6,6 +6,9 @@
 	<title>Register</title>
 </head>
 <body>
+	<c:if test="${sessionScope.loginCheck eq false}">
+		<jsp:forward page="home.jsp"/>
+	</c:if>
 	<jsp:include page="/WEB-INF/views/part/navi.jsp"/>
 	<div cellpadding="0" cellspacing="0" marginleft="0" margintop="0"
 		width="100%" height="100%" align="center">

@@ -12,9 +12,8 @@
 	</insert>
 	
 	<!-- 데이터 검색 -->
-	<select id = "selectMember" resultType="com.testSpringPjt.myapp.Member.Member">
-		SELECT * FROM user 
-					WHERE User_ID = #{uid} 
+	<select id = "selectMember" resultType="membervo">
+		SELECT User_ID as uid, User_PW as upw, Gender as gender, Contact as contact FROM user WHERE User_ID = #{uid}
 	</select>
 	
 </mapper>

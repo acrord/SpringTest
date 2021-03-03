@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	<head>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	</head>
@@ -15,16 +15,24 @@
 	      </button>
 	      <a class="navbar-brand" href="/myapp">myapp</a>
 	    </div>
-	
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 	        <li><a href="/myapp">Home</a></li>
 	      </ul>
-	      <!--<c:set var="name" value="${member.}" />-->
-	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="/myapp/member/login">Login</a></li>
-	      </ul>
+	      <c:if test="${sessionScope.loginCheck eq true}">
+		      <ul class="nav navbar-nav navbar-center">
+		      	<a class="navbar-brand" onclick="javascript:void(0)">${uid}님 안녕하세요</a>
+		      </ul>
+		      <ul class="nav navbar-nav navbar-right">
+		      	<li><a href="/myapp/member/logout">Logout</a></li>
+		      </ul>
+	      </c:if>
+	      <c:if test="${sessionScope.loginCheck eq false}">
+	      	<ul class="nav navbar-nav navbar-right">
+	      		<li><a href="/myapp/member/login">Login</a></li>
+	      	</ul>
+	      </c:if>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>

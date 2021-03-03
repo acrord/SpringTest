@@ -34,12 +34,13 @@ public class MemberController {
 		return "/register";
 	}
 	
+	
 	@RequestMapping(value="/register", method = RequestMethod.POST)
 	public ModelAndView memRegister(Member member) {
 		service.insertMember(member);
 		ModelAndView mav = new ModelAndView();
 		RedirectView redirectView = new RedirectView();
-		redirectView.setUrl("/myapp/member/login");
+		redirectView.setUrl("/myapp");
 		redirectView.setExposeModelAttributes(false);
 		mav.setView(redirectView);
 		return mav;
@@ -52,22 +53,45 @@ public class MemberController {
 		return checked;
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/loginCheck", method = RequestMethod.POST)
-	public String LoginCheck(String uid, String upw) {
-		Member member = service.loginCheck(uid, upw);
-		if(BCrypt.checkpw(upw, member.getUpw())) {
-			return "success";
-		}
-		else {
-			return "false";
-		}
-	}
-	
 	@RequestMapping(value="/login")
 	public String LoginForm() {
 		
 		return "/login";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/loginCheck", method = RequestMethod.POST)
+	public ModelAndView LoginCheck(String uid, String upw, HttpServletRequest req) {
+		Member member = service.loginCheck(uid);
+		ModelAndView mav = new ModelAndView();
+		RedirectView redirectView = new RedirectView();
+		HttpSession session = req.getSession();
+		if(member != null && BCrypt.checkpw(upw, member.getUpw())) {
+			session.setAttribute("loginCheck",true);
+            session.setAttribute("uid", member.getUid());
+    		redirectView.setExposeModelAttributes(false);
+    		redirectView.setUrl("/myapp");
+            mav.setView(redirectView);
+			return mav;
+		}
+		else {
+			redirectView.setExposeModelAttributes(false);
+			redirectView.setUrl("/myapp/member/login");
+			return mav;
+		}
+	}
+	
+	@RequestMapping(value="/logout")
+	public ModelAndView test(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		session.setAttribute("loginCheck",false);
+		session.setAttribute("uid",null);
+		ModelAndView mav = new ModelAndView();
+		RedirectView redirectView = new RedirectView();
+		redirectView.setUrl("/myapp");
+		redirectView.setExposeModelAttributes(false);
+		mav.setView(redirectView);
+		return mav;
 	}
 	
 }
