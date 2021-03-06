@@ -10,7 +10,7 @@ import com.testSpringPjt.myapp.Post.Post;
 import com.testSpringPjt.myapp.Post.dao.PostDao;
 
 @Service
-public class PostService implements IPostService{
+public abstract class PostService implements IPostService{
 	
 	@Autowired 
 	PostDao dao;
@@ -21,14 +21,37 @@ public class PostService implements IPostService{
 	}
 	
 	@Override
-	public int writePost(Post post) {
-		int result = 0;
+	public void writePost(Post post) {
 		
-		if(post.getPost_PW() == "") result = dao.writePost(post); 
+		if(post.getPost_PW() == "") dao.writePost(post); 
 		else {
 			post.setPost_PW(BCrypt.hashpw(post.getPost_PW(),BCrypt.gensalt()));
-			result = dao.writePost_withPW(post);
+			dao.writePost_withPW(post);
 		}
-		return result;
+	}
+	
+	@Override
+	public Post getPost(int post_ID) {
+		Post post = dao.getPost(post_ID);
+		return post;
+	}
+
+	@Override
+	public void modifyPost(Post post) {
+		if(post.getPost_PW() == "") dao.updatePost(post); 
+		else {
+			post.setPost_PW(BCrypt.hashpw(post.getPost_PW(),BCrypt.gensalt()));
+			dao.updatePost_withPW(post);
+		}
+		
+	}
+	
+	@Override
+	public void deletePost(int post_ID) {
+		int result = dao.deletePost(post_ID);
+		if(result==1) {
+			System.out.println(post_ID + "삭제 완료");
+		}
+		
 	}
 }

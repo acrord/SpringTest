@@ -25,14 +25,14 @@
 						required autofocus><BR> <label for="inputPassword"
 						class="sr-only">Password</label> <input type="password" name="upw"
 						class="form-control" placeholder="Password" required><br>
-					<div class="checkbox">
+					<div class="checkbox" style="margin-bottom:5px;">
 						<label> <input type="checkbox" value="remember-me">
 							기억하기
 						</label>
 					</div>
-					<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">로 그 인</button>
+				    <button type="submit" class="btn btn-primary" type="submit">로 그 인</button>
+				    <button type="button" class="btn btn-primary" onclick ="register()">회원가입</button>
 				</form>
-				<button onclick ="register()" class="btn btn-lg btn-primary btn-block">회원가입</button>
 			</div>
 		</div>
 	</div>

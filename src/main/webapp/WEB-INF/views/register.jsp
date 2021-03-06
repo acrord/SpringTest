@@ -18,45 +18,44 @@
 				<h2 class="card-title text-center" style="color: #113366;">회원가입</h2>
 			</div>
 			<div class="card-body">
-				<form name ="form" class="form-signup" onSubmit="return registercall()" method="POST" action="${cp}/member/register">
-					<label for="uid" class="col-lg-2" style="margin-top:8px">아이디</label> 
-					<div class = "col-lg-7">
-						<input type="text" name="uid" class="form-control" placeholder="Your ID" required autofocus>
+				<form name ="form" class="form-signup" onSubmit="return registercall()" method="POST" action="${cp}/member/register" style="text-align:left;">
+				  <div class="mb-3">
+				    <label for="uid" class="form-label">아이디</label>
+				    <div class="input-group mb-3">
+					  <input type="text" class="form-control" name="uid" id="uid" placeholder="Your ID" required autofocus>
+					  <button type="button" name="dupl" class="btn btn-primary btn-block" onclick="duplicationCheck()">중복확인</button>
 					</div>
-					<div class = "col-lg-3">
-						<button type="button" name="dupl" class="btn btn-primary btn-block" onclick="duplicationCheck()">중복확인</button>
+				  </div>
+				  <div class="mb-3">
+				    <label for="upw" class="form-label">비밀번호</label>
+				    <input type="password" class="form-control" name="upw" id="upw" placeholder="Password" required>
+				  </div>
+				  <div class="mb-3">
+				    <label class="form-label" for="gender">성별</label>
+				    <br>
+					<div class="form-check form-check-inline" id="gender">
+					  <input class="form-check-input" type="radio" name="gender" id="male" value="M">
+					  <label class="form-check-label" for="male">남자</label>
 					</div>
-					<BR> <BR> <BR> 
-					<label for="upw" class="col-lg-2" style="margin-top:8px">비밀번호</label> 
-					<div class = "col-lg-10">
-						<input type="password" name="upw" class="form-control" placeholder="Password" required>
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="radio" name="gender" id="female" value="F">
+					  <label class="form-check-label" for="female">여자</label>
 					</div>
-					<br><BR> <BR> 
-					<label for="gender" class="col-lg-2" style="margin-top:3px">성별</label>
-					<div id="gender" class = "col-lg-3" style="text-align:left">
-						<input type="radio" name="gender" value="M" id="male" required>&nbsp;<label for="male">남자</label>&nbsp;
-						<input type="radio" name="gender" value="F" id="felmale">&nbsp;<label for="female">여자</label>
+				  </div>
+				  <div class="mb-3">
+				    <label for="phone" class="form-label">연락처</label>
+				    <div id="phone" class="input-group">
+						<input type="text" name="uphone1" class="form-control" maxlength="3" style="text-align: center;" required>
+						&nbsp;-&nbsp;
+						<input type="text" name="uphone2" class="form-control" maxlength="4" style="text-align: center;" required>
+						&nbsp;-&nbsp;
+						<input type="text" name="uphone3" class="form-control" maxlength="4" style="text-align: center;" required>
 					</div>
-					<br><BR>
-					<label for="phone" class="col-lg-2" style="margin-top:8px">연락처</label>
-					<div id="phone" class = "col-lg-10">
-						<div class = "col-lg-3">
-							<input type="text" name="uphone1" class="form-control" maxlength="3" style="text-align: center;" required>
-						</div>
-						<div class = "col-lg-1">-</div>
-						<div class = "col-lg-3">
-							<input type="text" name="uphone2" class="form-control" maxlength="4" style="text-align: center;" required>
-						</div>
-						<div class = "col-lg-1">-</div>
-						<div class = "col-lg-3">
-							<input type="text" name="uphone3" class="form-control" maxlength="4" style="text-align: center;" required>
-						</div>
-					</div>
-					<br><BR><br>
-					<input type="hidden" name="contact">
-					<div style="padding-left: 5%; padding-right: 2%;"> 
-						<button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">가입하기</button>
-					</div>
+				  </div>
+				  <input type="hidden" name="contact">
+				  <div style="text-align:center">
+				  	<button id="btn-Yes" class="btn btn-primary btn-block" type="submit" style="text-align: center;">가입하기</button>
+				  </div>
 				</form>
 			</div>
 		</div>

@@ -10,11 +10,17 @@ public interface IPostDao {
 	public int writePost(Post post);
 
 	public int writePost_withPW(Post post);
+
+	public Post getPost(int post_ID);
 	
-//	public Post readPost(int pid);
+	public int updatePost(Post post);
+
+	public int updatePost_withPW(Post post);
 	
-//	public int updatePost(int pid, Post post);
-//	
-//	public int deletePost(int pid);
+	public int deletePost(int post_ID);
+
+	public int updateView(int post_ID);
+
 	
+//	public int checkPW(String PW);
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.testSpringPjt.myapp.Post.Post;
 
 @Repository
-public class PostDao implements IPostDao{
+public abstract class PostDao implements IPostDao{
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -32,6 +32,37 @@ public class PostDao implements IPostDao{
 	public int writePost_withPW(Post post) {
 		
 		int result = sqlSession.insert("writePost_withPW", post);
+		return result;
+	}
+
+	@Override
+	public Post getPost(int post_ID) {
+		Post post = sqlSession.selectOne("getPost", post_ID);
+		return post;
+	}
+
+	@Override
+	public int updatePost(Post post) {
+		int result = sqlSession.update("updatePost", post);
+		return result;
+	}
+	
+	@Override
+	public int updatePost_withPW(Post post) {
+		System.out.println("check_PW");
+		int result = sqlSession.update("updatePost_withPW", post);
+		return result;
+	}
+
+	@Override
+	public int deletePost(int post_ID) {
+		int result = sqlSession.delete("deletePost", post_ID);
+		return result;
+	}
+
+	@Override
+	public int updateView(int post_ID) {
+		int result = sqlSession.update("updateViews");
 		return result;
 	}
 }

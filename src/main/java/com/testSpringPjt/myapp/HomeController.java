@@ -40,7 +40,6 @@ public class HomeController {
 		}
 		logger.info("Welcome home! The client locale is {}.", locale);
 		List<Post> posts = service.getAllPosts();
-		System.out.println(posts.size() == 0);
 		req.setAttribute("posts", posts);
 		
 		return "/home";

@@ -7,8 +7,12 @@ import com.testSpringPjt.myapp.Post.Post;
 public interface IPostService {
 	public List<Post> getAllPosts();
 	
-	public int writePost(Post post);
+	public void writePost(Post post);
+
+	public Post getPost(int post_ID);
+
+	public void modifyPost(Post post);
 	
-//	public int checkPW(String post_PW);
+	public void deletePost(int post_ID);
 	
 }

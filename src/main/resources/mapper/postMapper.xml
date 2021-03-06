@@ -7,18 +7,43 @@
 	
 	<!-- 데이터 삽입 -->
 	<insert id = "writePost">
-		INSERT INTO post(Post_ID, User_ID, Created, Updated, Public, Title, Read_Cnt, Content) 
-					VALUES(#{post_ID}, #{user_ID}, #{created}, #{updated}, #{public}, #{title}, #{read_Cnt}, #{content})
+		INSERT INTO post(User_ID, Created, Updated, Public, Title, Content) 
+					VALUES(#{user_ID}, #{created}, #{updated}, #{public}, #{title}, #{content})
 	</insert>
 	
 	<insert id = "writePost_withPW">
-		INSERT INTO post 
-					VALUES(#{post_ID}, #{user_ID}, #{created}, #{updated}, #{public}, #{title}, #{post_PW}, #{read_Cnt}, #{content})
+		INSERT INTO post (User_ID, Created, Updated, Public, Title, Post_PW, Content)
+					VALUES(#{user_ID}, #{created}, #{updated}, #{public}, #{title}, #{post_PW}, #{content})
 	</insert>
 	
 	<!-- 데이터 검색 -->
 	<select id = "getList" resultType="postvo">
 		SELECT * FROM post
+		ORDER BY Post_ID DESC
 	</select>
+	
+	<select id = "getPost" resultType="postvo">
+		SELECT * FROM post WHERE #{post_ID} = Post_ID
+	</select>
+	
+	<!-- 데이터 수정 -->
+	<update id="updatePost">
+		UPDATE post
+		SET Title = #{title}, Content = #{content}, Updated = #{updated}, Post_PW = null
+		WHERE Post_ID = #{post_ID} AND User_ID = #{user_ID}
+	</update>
+	
+	<update id="updatePost_withPW">
+		UPDATE post
+		SET Title = #{title}, Content = #{content}, Updated = #{updated}, Post_PW = #{post_PW}
+		WHERE Post_ID = #{post_ID} AND User_ID = #{user_ID}
+	</update>
+	
+	
+	<!-- 데이터 삭제 -->
+	<delete id="deletePost">
+		DELETE FROM post
+		where Post_ID = #{post_ID} 
+	</delete>
 	
 </mapper>

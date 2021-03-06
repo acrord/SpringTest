@@ -1,10 +1,12 @@
 package com.testSpringPjt.myapp.Post;
 
+import java.sql.Timestamp;
+
 public class Post {
 	private int Post_ID;
 	private String User_ID;
-	private String Created;
-	private String Updated;
+	private Timestamp Created;
+	private Timestamp Updated;
 	private int Public;
 	private String Title;
 	private String Post_PW;
@@ -27,19 +29,19 @@ public class Post {
 		User_ID = user_ID;
 	}
 	
-	public String getCreated() {
+	public Timestamp getCreated() {
 		return Created;
 	}
 	
-	public void setCreated(String created) {
-		Created = created;
+	public void setCreated(Timestamp timestamp) {
+		Created = timestamp;
 	}
 	
-	public String getUpdated() {
+	public Timestamp getUpdated() {
 		return Updated;
 	}
 	
-	public void setUpdated(String updated) {
+	public void setUpdated(Timestamp updated) {
 		Updated = updated;
 	}
 	
