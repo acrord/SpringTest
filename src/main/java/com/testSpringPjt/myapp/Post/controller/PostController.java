@@ -20,6 +20,7 @@ import com.testSpringPjt.myapp.Post.service.PostService;
 @Controller
 public class PostController {
 	
+	@Autowired
 	PostService service;
 	
 	@RequestMapping("/newPost")

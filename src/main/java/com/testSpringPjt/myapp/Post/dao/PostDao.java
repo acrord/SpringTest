@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.testSpringPjt.myapp.Post.Post;
 
 @Repository
-public abstract class PostDao implements IPostDao{
+public class PostDao implements IPostDao{
 
 	@Autowired
 	private SqlSession sqlSession;

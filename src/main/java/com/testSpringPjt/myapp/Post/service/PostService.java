@@ -10,7 +10,7 @@ import com.testSpringPjt.myapp.Post.Post;
 import com.testSpringPjt.myapp.Post.dao.PostDao;
 
 @Service
-public abstract class PostService implements IPostService{
+public class PostService implements IPostService{
 	
 	@Autowired 
 	PostDao dao;
