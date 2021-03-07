@@ -21,6 +21,4 @@ public interface IPostDao {
 
 	public int updateView(int post_ID);
 
-	
-//	public int checkPW(String PW);
 }

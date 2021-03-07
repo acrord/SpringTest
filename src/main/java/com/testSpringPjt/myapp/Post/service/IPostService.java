@@ -15,4 +15,7 @@ public interface IPostService {
 	
 	public void deletePost(int post_ID);
 	
+	public String updateView(int post_ID);
+	
+	public String check_PW(int post_ID, String post_PW);
 }

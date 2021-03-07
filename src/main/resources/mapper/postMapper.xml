@@ -39,6 +39,11 @@
 		WHERE Post_ID = #{post_ID} AND User_ID = #{user_ID}
 	</update>
 	
+	<update id="updateViews">
+		UPDATE post
+		SET Read_Cnt = Read_Cnt+1
+		WHERE Post_ID = #{post_ID}
+	</update> 
 	
 	<!-- 데이터 삭제 -->
 	<delete id="deletePost">

@@ -7,12 +7,32 @@
 <meta charset="UTF-8">
 <title>게시글 조회</title>
 
-</head>
-<body>
-
 <%
 	String idx= request.getParameter("idx");
 %>
+<script
+	  src="https://code.jquery.com/jquery-3.5.1.min.js"
+	  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+	  crossorigin="anonymous"></script>
+<script type="text/javascript">
+	$.ajax({
+	    type:'post',
+	    url:'http://localhost:8090/myapp/post/view',
+	    dataType:'text',
+	    data:{post_ID:<%=idx%>},
+	    success: function(data) {
+	        if(data === 'success') {
+	            return true;
+	        } else {
+	        	alert("오류")
+				return false;
+	        }
+	    }
+	})
+</script>
+</head>
+<body>
+
 	<jsp:include page="/WEB-INF/views/part/navi.jsp"/>
 	<div align="center">
 		<h2>게시글 조회</h2>

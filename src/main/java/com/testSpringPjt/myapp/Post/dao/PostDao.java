@@ -62,7 +62,7 @@ public class PostDao implements IPostDao{
 
 	@Override
 	public int updateView(int post_ID) {
-		int result = sqlSession.update("updateViews");
+		int result = sqlSession.update("updateViews", post_ID);
 		return result;
 	}
 }

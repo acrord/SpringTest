@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -46,11 +47,22 @@ public class PostController {
 	
 	@RequestMapping("/content")
 	public ModelAndView viewPost(int idx, HttpServletRequest req) {
-		Post post = service.getPost(idx);
 		ModelAndView mav = new ModelAndView();
-		req.setAttribute("post", post);
-		mav.setViewName("contents");
-		return mav;
+		HttpSession session = req.getSession();
+		Post post = service.getPost(idx);
+		if((Boolean)session.getAttribute("checked") || post.getPost_PW() == null) {
+			session.setAttribute("checked", false);
+			req.setAttribute("post", post);
+			mav.setViewName("contents");
+			return mav;
+		}else {
+			RedirectView redirectView = new RedirectView();
+			redirectView.setUrl("/myapp");
+			redirectView.setExposeModelAttributes(false);
+			mav.setView(redirectView);
+			return mav;
+		}
+		
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
@@ -106,9 +118,22 @@ public class PostController {
 			return mav;
 		}
 	}
-//	@RequestMapping(value= "/view", method = RequestMethod.POST )
-//	public String updateViews(int post_ID) {
-//		String result = service.updateView(post_ID);
-//		return result;
-//	}
+	
+	@ResponseBody
+	@RequestMapping(value= "/view", method = RequestMethod.POST )
+	public String updateViews(int post_ID) {
+		System.out.println(post_ID);
+		String result = service.updateView(post_ID);
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value= "/checkPW", method = RequestMethod.POST)
+	public String checkPW(int post_ID, String post_PW, HttpSession session) {
+		String result = service.check_PW(post_ID, post_PW);
+		session.setAttribute("checked", true);
+		System.out.println(result);
+		
+		return result;
+	}
 }

@@ -24,11 +24,6 @@ public class MemberService implements IMemberService{
 		}
 	}
 
-	@Override
-	public Member searchMember(Member member) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	@Override
 	public String CheckId(String uid) {

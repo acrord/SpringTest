@@ -54,4 +54,28 @@ public class PostService implements IPostService{
 		}
 		
 	}
+
+	@Override
+	public String updateView(int post_ID) {
+		int result = dao.updateView(post_ID);
+		if(result==1) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	@Override
+	public String check_PW(int post_ID, String post_PW) {
+		Post post = dao.getPost(post_ID);
+		if(post != null && BCrypt.checkpw(post_PW, post.getPost_PW())) {
+			System.out.println("성공");
+			return "success";
+		}
+		else {
+			System.out.println("실패");
+			return "fail";
+		}
+	}
+
 }

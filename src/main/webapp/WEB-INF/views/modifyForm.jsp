@@ -31,7 +31,7 @@
 			  <div class="input-group-text">
 			    <input type="checkbox" class="form-check-input mt-0" id="pw" onchange="passEanble(this)">
 			  </div>
-			  <input type="text" class="form-control" id="pw_input" name="post_PW" readonly>
+			  <input type="password" class="form-control" id="pw_input" name="post_PW" readonly>
 			</div>
 	       </div>
 	       <div class="mb-3">
